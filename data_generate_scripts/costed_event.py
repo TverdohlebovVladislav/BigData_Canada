@@ -71,11 +71,33 @@ class CostedEvent(TableProductBase):
         # 5. Еще раз пробежаться по массиву дат и приплести для каждой даты время из вспомогательного кода Романа
         date = []
 
-        total_volume = []
+        # Number of data (instead of total value)
+        number_of_data = []
+        for i in range(len(event_type)):
+            # if is DATA
+            if event_type[i] == event_types[2]:
+                number_of_data.append(np.random.randint(500, 5000))
+            else: 
+                number_of_data.append(np.NaN)
 
+        # Cost
         cost = []
-        for i in range(self.max_count_costed_event - 1):
-            pass
+        # for i in range(len(event_type)):
+
+        #     # if is CALL
+        #     if event_type[i] == event_types[0]:
+        #         pr_inst = product_instance_id_FK_from_ce[i]
+        #         number_of_data.append(np.random.randint(500, 5000))
+
+        #     # if is SMS
+        #     if event_type[i] == event_types[1]:
+        #         number_of_data.append(np.random.randint(500, 5000))
+
+        #     # if is DATA
+        #     if event_type[i] == event_types[2]:
+        #         number_of_data.append(np.random.randint(500, 5000))
+        #     else: 
+        #         number_of_data.append(np.NaN)
 
 
         Costed_eventDf = pd.DataFrame(
@@ -83,7 +105,6 @@ class CostedEvent(TableProductBase):
                 "event_id_PK": pd.Series(event_id_PK, name="event_id_PK", dtype="int"),
                 "product_instance_id_FK": pd.Series(product_instance_id_FK_from_ce, name="product_instance_id_FK", dtype="int"),
                 
-
                 "calling_msisdn": pd.Series(calling_msisdn, name="calling_msisdn", dtype="int"),
                 "called_msisdn": pd.Series(called_msisdn, name="called_msisdn", dtype="int"),
 
@@ -91,7 +112,7 @@ class CostedEvent(TableProductBase):
                 # "cost": [1, 2, 3, 4, 5],
                 "duration": pd.Series(duration, name="duration", dtype=pd.Int64Dtype()),
                 "number_of_sms": pd.Series(number_of_sms, name="number_of_sms", dtype=pd.Int64Dtype()),
-                # "total_volume": [1, 2, 3, 4, 5],
+                "number_of_data": pd.Series(number_of_data, name="number_of_data", dtype=pd.Int64Dtype()),
                 "event_type": pd.Series(event_type, name="event_type", dtype="str"),
                 "direction": pd.Series(direction, name="direction", dtype="str"),
                 "roaming": pd.Series(roaming, name="roaming", dtype="int"),

@@ -18,5 +18,6 @@ class Charge(TableProductBase):
                 # Add other columns here...
             }
         )
+        
         ChargeDf.set_index('charge_id_PK', inplace=True)
         return ChargeDf
