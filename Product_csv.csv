@@ -1,0 +1,22 @@
+product_id,product_name,product_category,product_type,recurrent,cost_for_call,cost_for_sms,cost_for_data,allowance_sms,allowance_voice,allowance_data,Price
+1,rogers_infinite 25,Unlimited,Tariff,regularly,0,0,0,base plan,base plan,base plan,85
+2,rogers_infinite 40,Unlimited,Tariff,regularly,0,0,0,base plan,base plan,base plan,90
+3,bell_essential 25,Unlimited,Tariff,regularly,0,0,0,base plan,base plan,base plan,70
+4,Voice 30,Talk & Text,Tariff,regularly,0,0,40,base plan,base plan,add-on,30
+5,bell_base_4g,Limited,Tariff,regularly,,,75,,,add-on,35
+6,bell_buisness,Business,Tariff,regularly,,,90,,,add-on,35
+7,Base plan 30,Business,Tariff,regularly,,,110,,,add-on,5
+8,Free YouTube Music,Music,addon,regularly,,,,,,,10
+9,Free YouTube,Video,addon,regularly,,,,,,,15
+10,Free TikTok,Video,addon,regularly,,,,,,,20
+11,Spotify Individual,Music,addon,regularly,,,,,,,10
+12,Unlimited Canada-US calling,addon,addon,regularly,,,,,,,16
+13,Add Internet,addon,addon, just once,,,50,,,add-on,50
+14,Add Calls,addon,addon, just once,30,,,,add-on,,30
+15,Add SMS,addon,addon, just once,,20,,add-on,,,20
+16,Random ring tone,addon,addon, just once,,,,,,,2
+17,Ring tone 1,addon,addon, just once,,,,,,,5
+18,Ring tone 2,addon,addon, just once,,,,,,,10
+19,10 gigabytes,addon,addon, just once,,,,,,add-on,30
+20,20 gigabytes,addon,addon, just once,,,,,,add-on,50
+21,30 gigabytes,addon,addon, just once,,,,,,add-on,65
