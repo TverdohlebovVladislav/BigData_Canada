@@ -3,9 +3,7 @@ import pandas as pd
 class TableProductBase():
     
     max_count_customer: int = 100
-    with open("data_source/Product.csv") as Product:
-        ProductDf = pd.read_csv(Product, delimiter=',')
-        max_count_product_inst: int = ProductDf.shape[0]
+    max_count_product_inst: int = 150
     max_count_costed_event: int = 10485
     max_count_costed_charge: int= 1233
     max_count_costed_payment: int = 12442 
