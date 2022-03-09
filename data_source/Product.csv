@@ -11,9 +11,9 @@ product_id,product_name,product_category,product_type,recurrent,cost_for_call,co
 10,Netflix Premium,Other,addon,regularly,,,,,,,20
 11,Spotify Individual,Other,addon,regularly,,,,,,,10
 12,Spotify Family,Other,addon,regularly,,,,,,,16
-13,Add Internet,data,addon,just once,,,50,,,add-on,50
-14,Add Calls,addon,addon,just once,30,,,,add-on,,30
-15,Add SMS,addon,addon,just once,,20,,add-on,,,20
+13,Add Internet 10Gb,data,addon,just once,,,0.05,,,add-on,50
+14,Add Calls 100,addon,addon,just once,0.3,,,,add-on,,30
+15,Add SMS 100,addon,addon,just once,,0.02,,add-on,,,20
 16,Ring tone 1,Other,addon,just once,,,,,,,2
 17,Ring tone 2,Other,addon,just once,,,,,,,5
 18,Ring tone 3,Other,addon,just once,,,,,,,10
