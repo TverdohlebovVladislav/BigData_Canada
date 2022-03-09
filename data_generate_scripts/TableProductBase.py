@@ -2,7 +2,7 @@ import pandas as pd
 
 class TableProductBase():
     
-    max_count_customer: int = 100
+    max_count_customer: int = 10001
     max_count_product_inst: int = 150
     max_count_costed_event: int = 10485
     max_count_costed_charge: int= 1233
