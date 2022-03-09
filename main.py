@@ -15,15 +15,14 @@ from data_generate_scripts import payment
 def main():
 
     # Don't change the order!
-    tables = (
-        cust.Customer(), 
-        prod_inst.ProductInstance(), 
-        cost_ev.CostedEvent(), 
-        charge.Charge(), 
-        payment.Payment()
-    )
+    cust.Customer().save_to_csv()
+    prod_inst.ProductInstance().save_to_csv() 
+    cost_ev.CostedEvent().save_to_csv() 
+    charge.Charge().save_to_csv()
+    payment.Payment().save_to_csv()
+    
 
-    for table in tables:
-        table.save_to_csv()
+    # for table in tables:
+    #     table.save_to_csv()
     
 main()

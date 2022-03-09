@@ -22,7 +22,7 @@ class TableProductBase():
     def save_to_csv(self, path: str = "data_source/"):
         if hasattr(self, "dataFrame"):
             self.dataFrame.to_csv(path + self.__class__.__name__ + ".csv") 
-            print("Файл сохранен!")
+            print("Файл " + self.__class__.__name__ + ".csv" + " сохранен!")
         else:
             print("Ошибка сохранения файла!")
 
