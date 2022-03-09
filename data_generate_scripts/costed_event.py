@@ -161,7 +161,7 @@ class CostedEvent(TableProductBase):
                 "called_msisdn": pd.Series(called_msisdn, name="called_msisdn", dtype="int"),
 
                 # "date": [1, 2, 3, 4, 5],
-                "cost": pd.Series(cost, name="cost", dtype=pd.Int64Dtype()),
+                "cost": pd.Series(cost, name="cost", dtype="float"),
                 "duration": pd.Series(duration, name="duration", dtype=pd.Int64Dtype()),
                 "number_of_sms": pd.Series(number_of_sms, name="number_of_sms", dtype=pd.Int64Dtype()),
                 "number_of_data": pd.Series(number_of_data, name="number_of_data", dtype=pd.Int64Dtype()),
