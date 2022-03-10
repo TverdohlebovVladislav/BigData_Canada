@@ -13,7 +13,7 @@ class Payment(TableProductBase):
         payment_methods = ['bank card', 'from terminal', 'from another phone']
 
         # ---
-        # 6. Create dataframe - Payment
+        # Create dataframe - Payment
         payment_id_PK: list  = [i for i in range(1, self.max_count_costed_payment)]
         customer_id_FK_in_payment: list = np.random.randint(1, self.max_count_customer, size=self.max_count_costed_payment - 1)
 
