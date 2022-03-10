@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import datetime
+import random
+
 
 from data_generate_scripts.TableProductBase import TableProductBase
 
@@ -14,7 +17,6 @@ class CostedEvent(TableProductBase):
         direction_variations = ['incoming', 'outgoing']
 
         productDF = TableProductBase.get_df()
-        # print(productDF['cost_for_call'][0])
 
         products_with_call_cost = []
         products_with_sms_cost = []
@@ -27,14 +29,15 @@ class CostedEvent(TableProductBase):
                 products_with_sms_cost.append(productDF.index[i])
             if not pd.isnull(productDF)['cost_for_data'][i + 1]:
                 products_with_data_cost.append(productDF.index[i])
+        
+        with open("data_source/ProductInstance.csv") as ProductInstance:
+            pr_insDF = pd.read_csv(ProductInstance, delimiter=',')
 
         # ---
         # Generation columns for dataset 
 
         # ID
         event_id_PK: list  = [i for i in range(1, self.max_count_costed_event)] 
-
-
 
         # From
         calling_msisdn: list = np.random.randint(1, self.max_count_customer, size=self.max_count_costed_event - 1)
@@ -52,23 +55,23 @@ class CostedEvent(TableProductBase):
 
         # FK
         product_instance_id_FK_from_ce: list  = []
-        
+        #product_instanceDF = pd.read_csv('data_source/ProductInstance.csv', delimiter=',')
         for i in range(len(event_type)):
-            product_instanceDF = pd.read_csv('data_source/ProductInstance.csv', delimiter=',')
+            
             # if is CALL
             if event_type[i] == event_types[0]:
                 product_el = np.random.choice(products_with_call_cost)
-                el_to_add = product_instanceDF[product_instanceDF.product_id_FK == product_el].product_instance_id_PK
+                el_to_add = pr_insDF[pr_insDF.product_id_FK == product_el].product_instance_id_PK
                 product_instance_id_FK_from_ce.append(np.random.choice(list(el_to_add)))
             # if is SMS
             if event_type[i] == event_types[1]:
                 product_el = np.random.choice(products_with_sms_cost)
-                el_to_add = product_instanceDF[product_instanceDF.product_id_FK == product_el].product_instance_id_PK
+                el_to_add = pr_insDF[pr_insDF.product_id_FK == product_el].product_instance_id_PK
                 product_instance_id_FK_from_ce.append(np.random.choice(list(el_to_add)))
             # if is DATA
             if event_type[i] == event_types[2]:
                 product_el = np.random.choice(products_with_data_cost)
-                el_to_add = product_instanceDF[product_instanceDF.product_id_FK == product_el].product_instance_id_PK
+                el_to_add = pr_insDF[pr_insDF.product_id_FK == product_el].product_instance_id_PK
                 product_instance_id_FK_from_ce.append(np.random.choice(list(el_to_add)))
 
 
@@ -89,7 +92,7 @@ class CostedEvent(TableProductBase):
         for i in range(len(event_type)):
             # if is CALL
             if event_type[i] == event_types[0]:
-                duration.append(np.random.randint(1, 1800))
+                duration.append(np.random.randint(1, 300))
             else: 
                 duration.append(np.NaN)
 
@@ -110,12 +113,19 @@ class CostedEvent(TableProductBase):
                 number_of_sms.append(np.NaN)
 
         # Date 
-        # 1. Сгенерировать диапазон дат по каждлму дню недели
-        # 2. Слить в один список [mondeys, tusdays, ..] и генерить для каждой записи таблицы по вероятностям [0.4, 0.7,  ...]
-        # 3. Внутри цикла вытягивать из массивов дней недели рандомную дату 
-        # 4. Сохранять эту рандомную дату в массив Date
-        # 5. Еще раз пробежаться по массиву дат и приплести для каждой даты время из вспомогательного кода
         date = []
+        def random_date(start, end):
+            """Generate a random datetime between `start` and `end`"""
+            return start + datetime.timedelta(
+                # Get a random amount of seconds between `start` and `end`
+                seconds=random.randint(0, int((end - start).total_seconds())))
+
+        d1 = datetime.datetime.strptime('01/01/2020 00:00 AM', '%m/%d/%Y %H:%M %p')
+        d2 = datetime.datetime.strptime('12/31/2021 00:00 PM', '%m/%d/%Y %H:%M %p')
+        for i in range(self.max_count_costed_event - 1):
+            rnd = random_date(d1, d2)
+            date.append(rnd.strftime("%d/%m/%Y %I:%M %p").replace('/', '.'))
+        date.sort(key=lambda lst: (lst[8:10], lst[2:5], lst[0:2], lst[-2::1], lst[-8:-6], lst[-5:-3]))
 
         # Number of data (instead of total value)
         number_of_data = []
@@ -132,8 +142,6 @@ class CostedEvent(TableProductBase):
         for i in range(self.max_count_costed_event - 1):
 
             pr_inst = product_instance_id_FK_from_ce[i] - 1
-            productDF = TableProductBase.get_df()
-            pr_insDF = pd.read_csv('data_source/ProductInstance.csv', delimiter=',')
 
             # if is CALL
             if event_type[i] == event_types[0]:
@@ -159,7 +167,7 @@ class CostedEvent(TableProductBase):
                 "calling_msisdn": pd.Series(calling_msisdn, name="calling_msisdn", dtype="int"),
                 "called_msisdn": pd.Series(called_msisdn, name="called_msisdn", dtype="int"),
 
-                # "date": [1, 2, 3, 4, 5],
+                "date": pd.Series(date, name="date", dtype="str"),
                 "cost": pd.Series(cost, name="cost", dtype="float"),
                 "duration": pd.Series(duration, name="duration", dtype=pd.Int64Dtype()),
                 "number_of_sms": pd.Series(number_of_sms, name="number_of_sms", dtype=pd.Int64Dtype()),
