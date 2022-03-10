@@ -2,11 +2,11 @@ import pandas as pd
 
 class TableProductBase():
     
-    max_count_customer: int = 10001
-    max_count_product_inst: int = 150
-    max_count_costed_event: int = 10485
-    max_count_costed_charge: int= 1233
-    max_count_costed_payment: int = 12442 
+    max_count_customer: int = 14000
+    max_count_product_inst: int = 100000
+    max_count_costed_event: int = 100000
+    max_count_costed_charge: int= 10000
+    max_count_costed_payment: int = 240000 
 
     @staticmethod
     def get_df() -> pd.DataFrame:
