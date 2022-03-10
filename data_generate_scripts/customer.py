@@ -16,6 +16,8 @@ class Customer(TableProductBase):
         autopay_card = list(customer["autopay_card"])
         status = list(customer["status"])
         data_of_birth = list(customer["data_of_birth"])
+        termin_date = pd.read_csv("data_source\ProductInstance.csv")
+        termination_date = list (termin_date['termination_date'])
         
         # 1. Create dataframe - Customer
         path_Customer = "file.xlsx"
@@ -112,7 +114,8 @@ class Customer(TableProductBase):
                 "customer_since": pd.Series(customer_since, name="customer_since", dtype="str"),
                 "email" : pd.Series(email, name="email", dtype="str"),
                 "region": pd.Series(region, name="email", dtype="str"),
-                # Add other columns here...
+                "termination_date": pd.Series(termination_date,name = "termination_date", dtype = "str"),
+                
             }
         )
         CustomerDf.set_index('customer_id', inplace=True)
