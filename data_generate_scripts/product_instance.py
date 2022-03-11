@@ -5,18 +5,17 @@ from datetime import datetime as DT
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import parse as du_parse
-from data_generate_scripts.TableProductBase import TableProductBase
+from TableProductBase import TableProductBase
 
 class ProductInstance(TableProductBase):
 
     def __init__(self):
         self.dataFrame = self.get_df()
+        self.save_csv = self.save_to_csv()
 
     def get_df(self) -> pd.DataFrame:
         max_count_product = TableProductBase.get_max_count_product()
-        product_data = pd.read_csv("data_source/Product.csv")
-        product_data.set_index('product_id', inplace=True)
-
+        product_data = TableProductBase.get_df()
 
         cust = pd.read_csv("data_source/customer_const.csv")
         cust.set_index('customer_id', inplace=True)
@@ -42,7 +41,7 @@ class ProductInstance(TableProductBase):
                 date = rand_date(start_dt, end_dt)
                 flag.append(i)
                 for key in ban:
-                    ban.setdefault(key).setdefault('cust_id').append(cust_status.values[i]) 
+                    ban.setdefault(key).setdefault('cust_id').append(i) 
                     ban.setdefault(key).setdefault('date').append(date)
 
         base_of_date = []   
@@ -111,8 +110,8 @@ class ProductInstance(TableProductBase):
          #get status      
         status = []     
         for i in termin_date: 
-            if pd.isna(i):status.append('In process')
-            else: status.append('Finished')
+            if pd.isna(i):status.append(1)
+            else: status.append(0)
 
         #get distribution channel
         distirb_chanel = []
@@ -148,3 +147,6 @@ class ProductInstance(TableProductBase):
         Product_instanceDf['termination_date'] = pd.to_datetime(Product_instanceDf['termination_date'], format='%Y-%m-%dT')
         Product_instanceDf.set_index('product_instance_id_PK', inplace=True)
         return Product_instanceDf
+#a = ProductInstance()
+#a.save_csv
+
