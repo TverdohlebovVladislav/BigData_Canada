@@ -3,8 +3,8 @@ import pandas as pd
 class TableProductBase():
     
     max_count_customer: int = 1400
-    max_count_product_inst: int = 10000
-    max_count_costed_event: int = 10000
+    max_count_product_inst: int = 1000
+    max_count_costed_event: int = 1000
     max_count_costed_charge: int= 1000
     max_count_costed_payment: int = 24000 
 

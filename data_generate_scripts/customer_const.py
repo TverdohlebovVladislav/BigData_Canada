@@ -2,14 +2,14 @@ import random
 import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
-
+from TableProductBase import TableProductBase
 
 def save_to_csv(dataFrame, name, path: str = "data_source/"):
     dataFrame.to_csv(path + name + ".csv") 
 
 
 # Count of data in every table
-max_count_customer: int = 10001
+max_count_customer: int = TableProductBase.max_count_customer
 
 
 # ---

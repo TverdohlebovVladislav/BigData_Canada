@@ -5,7 +5,7 @@ from datetime import datetime as DT
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import parse as du_parse
-from TableProductBase import TableProductBase
+from data_generate_scripts.TableProductBase import TableProductBase
 
 class ProductInstance(TableProductBase):
 

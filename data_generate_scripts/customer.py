@@ -38,12 +38,13 @@ class Customer(TableProductBase):
                 'Richard', 'Rogen', 'Robinson']
         gender_values = ['female', 'male']
         language_values = ['English', 'French', 'Chinese']
-        agree_for_promo_and_autopay_card = ['Yes', 'No']
+        agree_for_promo_and_autopay_card = [1, 0]
         customer_category_values = ['business', ' physical']
         email_values = ['@aol.com', '@gmail.com', '@yahoo.com', '@gmx.com', '@hotmail.com' ,'@mail.com']
         
         # Gender
         gender = np.random.choice(gender_values, size=TableProductBase.max_count_customer - 1, p=[0.5, 0.5])
+
         # First name and Last name, email
         first_name, last_name, email = [], [], []
         for i in range(len(gender)):
@@ -85,7 +86,7 @@ class Customer(TableProductBase):
 
         check = True 
         while check: # Проверка: нет ли одинаковых номеров
-            region = np.random.choice(list(code_and_region.keys()), size=TableProductBase.max_count_customer, 
+            region = np.random.choice(list(code_and_region.keys()), size=TableProductBase.max_count_customer - 1, 
                                         p=[0.38, 0.23, 0.14, 0.11, 0.04, 0.03, 0.03, 0.02, 0.013, 0.004, 0.001, 0.001, 0.001])
             phone_number = []
             for i in region:
@@ -115,6 +116,8 @@ class Customer(TableProductBase):
                 "email" : pd.Series(email, name="email", dtype="str"),
                 "region": pd.Series(region, name="email", dtype="str"),
                 "termination_date": pd.Series(termination_date,name = "termination_date", dtype = "str"),
+
+                "MSISDN": pd.Series(phone_number,name = "MSISDN", dtype = "str"),
                 
             }
         )
